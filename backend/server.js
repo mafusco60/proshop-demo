@@ -10,6 +10,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 const port = process.env.PORT || 4000;
 
 connectDB(); // Connect to MongoDB
+
 const app = express();
 
 //Body parser middleware
