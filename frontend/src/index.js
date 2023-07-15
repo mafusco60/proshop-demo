@@ -1,4 +1,4 @@
-import React from 'react';
+import { React } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
 	createBrowserRouter,
@@ -21,6 +21,9 @@ import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingScreen from './screens/ShippingScreen';
+import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderScreen from './screens/OrderScreen';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -33,6 +36,9 @@ const router = createBrowserRouter(
 
 			<Route path='' element={<PrivateRoute />}>
 				<Route path='/shipping' element={<ShippingScreen />} />
+				<Route path='/payment' element={<PaymentScreen />} />
+				<Route path='/placeorder' element={<PlaceOrderScreen />} />
+				<Route path='/order/:id' element={<OrderScreen />} />
 			</Route>
 		</Route>
 	)
@@ -40,11 +46,9 @@ const router = createBrowserRouter(
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<RouterProvider router={router} />
-		</Provider>
-	</React.StrictMode>
+	<Provider store={store}>
+		<RouterProvider router={router} />
+	</Provider>
 );
 
 reportWebVitals();

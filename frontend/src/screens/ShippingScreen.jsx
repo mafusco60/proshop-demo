@@ -4,11 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import { saveShippingAddress } from '../slices/cartSlice';
+import CheckoutSteps from '../components/CheckoutSteps';
 
 const ShippingScreen = () => {
 	const cart = useSelector((state) => state.cart);
 	const { shippingAddress } = cart;
 
+	const [shippingName, setShippingName] = useState(
+		shippingAddress?.shippingName || ''
+	);
 	const [address, setAddress] = useState(shippingAddress?.address || '');
 	const [city, setCity] = useState(shippingAddress?.city || '');
 	const [state, setState] = useState(shippingAddress?.state || '');
@@ -23,15 +27,34 @@ const ShippingScreen = () => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		dispatch(
-			saveShippingAddress({ address, city, state, postalCode, country })
+			saveShippingAddress({
+				shippingName,
+				address,
+				city,
+				state,
+				postalCode,
+				country,
+			})
 		);
 		navigate('/payment');
 	};
 
 	return (
 		<FormContainer>
+			<CheckoutSteps step1 step2 />
+
 			<h1>Shipping</h1>
 			<Form onSubmit={submitHandler}>
+				<Form.Group className='my-2' controlId='name'>
+					<Form.Label>Name</Form.Label>
+					<Form.Control
+						type='text'
+						placeholder='Enter Name'
+						value={shippingName}
+						onChange={(e) => setShippingName(e.target.value)}
+					></Form.Control>
+				</Form.Group>
+
 				<Form.Group className='my-2' controlId='address'>
 					<Form.Label>Address</Form.Label>
 					<Form.Control
