@@ -20,7 +20,7 @@ const orderSchema = new mongoose.Schema(
 		],
 		shippingAddress: {
 			// this is an object
-			fullName: { type: String, required: true },
+			//fullName: { type: String, required: true },
 			address: { type: String, required: true },
 			// these are strings, not numbers, because they can have dashes
 			city: { type: String, required: true },
