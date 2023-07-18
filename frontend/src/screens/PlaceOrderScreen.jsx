@@ -9,7 +9,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { useCreateOrderMutation } from '../slices/ordersApiSlice';
 import { clearCartItems } from '../slices/cartSlice';
-
+import { clearShippingPrice } from '../slices/cartSlice';
 const PlaceOrderScreen = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -38,6 +38,7 @@ const PlaceOrderScreen = () => {
 				totalPrice: cart.totalPrice,
 			}).unwrap();
 			dispatch(clearCartItems());
+			dispatch(clearShippingPrice());
 			navigate(`/order/${res._id}`);
 		} catch (err) {
 			toast.error(err);
